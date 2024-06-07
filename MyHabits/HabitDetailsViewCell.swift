@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HabitDetailsViewCell: UITableViewCell {
+final class HabitDetailsViewCell: UITableViewCell {
 
     static let id = "HabitDetailsViewCell"
     private var date: Date?

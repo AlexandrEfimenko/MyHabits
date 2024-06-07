@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HabitViewController: UIViewController, UIColorPickerViewControllerDelegate {
+final class HabitViewController: UIViewController, UIColorPickerViewControllerDelegate {
 
     private var habit: Habit?
     private weak var habitsVC: HabitsViewController? = nil

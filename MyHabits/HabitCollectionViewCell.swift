@@ -7,9 +7,10 @@
 
 import UIKit
 
-class HabitCollectionViewCell: UICollectionViewCell {
+final class HabitCollectionViewCell: UICollectionViewCell {
     static let idCell = "HabitCollectionViewCell"
     private var habit: Habit?
+    var collectionView: UICollectionView?
 
     private lazy var nameHabitLabel: UILabel = {
        let name = UILabel()
@@ -26,10 +27,10 @@ class HabitCollectionViewCell: UICollectionViewCell {
        mark.contentMode = .scaleAspectFill
        mark.clipsToBounds = true
        mark.layer.cornerRadius = 25
-        mark.isUserInteractionEnabled = true
+       mark.isUserInteractionEnabled = true
 
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapMarkImage))
-        mark.addGestureRecognizer(tapRecognizer)
+       let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapMarkImage))
+       mark.addGestureRecognizer(tapRecognizer)
 
        return mark
     }()
@@ -55,6 +56,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+
 
         setupUI()
         setupConstraints()
@@ -96,7 +98,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
 
 
 
-     func updateData(habit: Habit) {
+    func updateData(habit: Habit) {
         self.habit = habit
         self.nameHabitLabel.text = habit.name
         self.nameHabitLabel.textColor = habit.color
@@ -112,6 +114,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
         self.timeLabel.text = "Каждый день в " + getDateTimeText(date: habit.date)
         self.counterLabel.text = "Счетчик: \(habit.trackDates.count)"
 
+
         // self.markImage.layer.borderColor = habit.color.cgColor
         // self.markImage.layer.borderWidth = 3
         // self.markImage.backgroundColor = .blue
@@ -126,18 +129,20 @@ class HabitCollectionViewCell: UICollectionViewCell {
 
     @objc
     private func tapMarkImage() {
-        if (self.habit != nil) {
-            let habit = self.habit!
+        guard let habit = self.habit  else { return }
 
             if !habit.isAlreadyTakenToday {
                 HabitsStore.shared.track(habit)
-                updateData(habit: habit)
+
+               // updateData(habit: habit)
+
+                self.collectionView?.reloadData()
             }
         }
     }
 
 
-}
+
 
 
 

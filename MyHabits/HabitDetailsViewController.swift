@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HabitDetailsViewController: UITableViewController {
+final class HabitDetailsViewController: UITableViewController {
 
     private var dataSource = HabitsStore.shared.dates
     private var habit: Habit

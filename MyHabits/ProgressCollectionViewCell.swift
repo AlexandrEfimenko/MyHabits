@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProgressCollectionViewCell: UICollectionViewCell {
+final class ProgressCollectionViewCell: UICollectionViewCell {
     static let idCell = "ProgressCollectionViewCell"
 
     lazy var progressView: UIProgressView = {
@@ -54,6 +54,7 @@ class ProgressCollectionViewCell: UICollectionViewCell {
 
         backgroundColor = .systemBackground
         layer.cornerRadius = 20
+        progressView.progress = HabitsStore.shared.todayProgress
     }
 
     private func setupConstraints() {

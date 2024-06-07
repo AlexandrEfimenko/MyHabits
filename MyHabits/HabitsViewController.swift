@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HabitsViewController: UIViewController {
+final class HabitsViewController: UIViewController {
 
     private enum LayoutConstant {
           static let spacing: CGFloat = 20.0
@@ -113,6 +113,8 @@ extension HabitsViewController: UICollectionViewDelegate, UICollectionViewDataSo
         } else {
             let habit: Habit = HabitsStore.shared.habits[indexPath.row-1]
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HabitCollectionViewCell.idCell, for: indexPath) as! HabitCollectionViewCell
+            cell.collectionView = collectionView
+
             cell.updateData(habit: habit)
 
             return cell
@@ -155,16 +157,13 @@ extension HabitsViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
         if indexPath.row != 0 {
             let habit: Habit = HabitsStore.shared.habits[indexPath.row-1]
 
             let vc = HabitDetailsViewController(habit: habit, habitsVC: self)
             navigationController?.pushViewController(vc, animated: true)
-
         }
     }
-
 
 
 
